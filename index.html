@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LION SMP</title>
+    
+    <!-- External CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FFD700, #FFAE42);
+            color: black;
+            text-align: center;
+            overflow-x: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* Particles Background */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* Main Content */
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 1200px;
+        }
+
+        .text-content {
+            text-align: left;
+        }
+
+        .small-text {
+            font-size: 2.5vw;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .big-text {
+            font-size: 5vw;
+            font-weight: bold;
+            line-height: 1.1;
+            margin-top: 10px;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: black;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(0, 0, 0, 0.3);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Image Styling */
+        .image-container {
+            max-width: 40%;
+            pointer-events: none;
+            user-drag: none;
+            user-select: none;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            -webkit-user-drag: none;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        /* Disable Right-Click & Long Press */
+        img {
+            -webkit-user-drag: none;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .small-text {
+                font-size: 5vw;
+            }
+            .big-text {
+                font-size: 8vw;
+            }
+            .cta-button {
+                font-size: 1rem;
+                padding: 12px 24px;
+            }
+            .image-container {
+                display: block;
+                max-width: 80%;
+            }
+        }
+    </style>
+</head>
+
+<body oncontextmenu="return false;" onselectstart="return false;" ondragstart="return false;">
+
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Hero Section -->
+    <div class="container">
+        <!-- Left Text Content -->
+        <div class="text-content">
+            <div class="small-text" data-aos="fade-right">WELCOME</div>
+            <div class="big-text" data-aos="fade-left">
+                 <br> LION SMP <br> ADVENTURE
+            </div>
+            <button class="cta-button" data-aos="zoom-in" onclick="window.location.href='introduction.html'">
+                Get Started
+            </button>
+        </div>
+
+        <!-- Right Image (Visible on both PC & Mobile) -->
+        <div class="image-container" data-aos="fade-left">
+            <img src="https://www.dropbox.com/scl/fi/jo2zi59wvb5gwfe7imqbx/LION-SMP.png?rlkey=5vrib0ndgc7q4wzen35m3do8a&st=omvsuz0f&dl=1" alt="LION SMP Banner">
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // GSAP Animation
+        gsap.from(".text-content", { opacity: 0, y: 50, duration: 1.5, delay: 0.5 });
+
+        // AOS Animation
+        AOS.init({ duration: 1000, once: true });
+
+        // Particles.js Background Effect
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#000" },
+                shape: { type: "circle" },
+                opacity: { value: 0.2, random: true },
+                size: { value: 3, random: true },
+                move: { enable: true, speed: 1, direction: "none", random: false, out_mode: "out" }
+            },
+            interactivity: {
+                events: { onhover: { enable: true, mode: "repulse" } },
+                modes: { repulse: { distance: 100, duration: 0.4 } }
+            }
+        });
+    </script>
+
+</body>
+</html>
