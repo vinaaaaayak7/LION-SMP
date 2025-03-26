@@ -31,6 +31,62 @@
             width: 100%;
             left: 0%;
         }
+
+        /* Join Discord Button */
+        .custom-btn {
+            background: linear-gradient(135deg, #4A90E2, #357ABD);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            padding: 12px 24px;
+            font-size: 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 120, 255, 0.3);
+        }
+
+        .custom-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Pop-Up Notification */
+        #popup {
+            position: fixed;
+            bottom: -100px;
+            right: 20px;
+            background: #222;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transition: all 0.5s ease-in-out;
+            cursor: pointer;
+            width: 250px;
+        }
+
+        #popup.show {
+            bottom: 20px;
+            opacity: 1;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: #4A90E2;
+            transition: width 4.5s linear;
+        }
+
     </style>
 </head>
 <body class="bg-teal-700 text-white">
@@ -42,8 +98,8 @@
             
             <!-- Desktop Menu -->
             <div class="hidden md:flex space-x-6">
-                <a href="index.html">Home</a>
-                <a href="#" class="nav-link">Ranks</a>
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="ranks.html" class="nav-link">Ranks</a>
                 <a href="#" class="nav-link">Reviews</a>
                 <a href="#" class="nav-link">Team</a>
             </div>
@@ -56,8 +112,8 @@
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-teal-800 p-4">
-            <a href="index.html">Home</a>
-            <a href="#" class="block py-2 nav-link">Ranks</a>
+            <a href="index.html" class="block py-2 nav-link">Home</a>
+            <a href="ranks.html" class="block py-2 nav-link">Ranks</a>
             <a href="#" class="block py-2 nav-link">Reviews</a>
             <a href="#" class="block py-2 nav-link">Team</a>
         </div>
@@ -81,19 +137,57 @@
 
         <div class="mt-6">
             <a href="https://discord.com/invite/your-server-link" 
-                class="bg-indigo-600 hover:bg-indigo-800 px-6 py-3 rounded-full text-lg font-semibold shadow-md transition duration-300">
+                class="custom-btn">
                 Join Discord
             </a>
         </div>
     </section>
 
+    <!-- Pop-Up Notification -->
+    <div id="popup">
+        🎉 You can buy ranks from the <b>Ranks</b> page! <br>
+        <span style="color: #4A90E2; text-decoration: underline;">Click here</span>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div id="progress-fill" class="progress-bar-fill"></div>
+        </div>
+    </div>
+
     <script>
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
+        const popup = document.getElementById('popup');
+        const progressFill = document.getElementById('progress-fill');
 
         menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
+
+        // Close menu when clicking anywhere outside
+        document.addEventListener("click", function(event) {
+            if (!menuBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+
+        // Show popup after 5 seconds
+        setTimeout(() => {
+            popup.classList.add('show');
+            progressFill.style.width = "100%"; // Animate progress bar
+
+            // Hide after 5 more seconds
+            setTimeout(() => {
+                popup.classList.remove('show');
+                progressFill.style.width = "0%"; // Reset progress bar
+            }, 5000);
+        }, 5000);
+
+        // Redirect to ranks page on click
+        popup.addEventListener('click', () => {
+            window.location.href = "ranks.html";
+        });
+
     </script>
 
 </body>
